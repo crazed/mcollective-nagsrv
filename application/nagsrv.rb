@@ -9,7 +9,7 @@ class MCollective::Application::Nagsrv<MCollective::Application
   end
 
   def validate_configuration(configuration)
-    raise "Command should be stats" unless configuration[:stats] =~ /^stats$/
+    raise "Command should be stats" unless configuration[:command] =~ /^stats$/
   end
 
   def main
