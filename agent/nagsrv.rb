@@ -26,7 +26,7 @@ module MCollective
                 :description => 'An agent that will manipulate nagios using the ruby-nagios library',
                 :author      => 'crazed',
                 :version     => '0.1',
-                :timeout     => 120,
+                :timeout     => 120
 
       def nagios
         return @nagios if @nagios
