@@ -34,5 +34,5 @@ Acknowledge all services with puppet in the name:
 
      * [ ============================================================> ] 1 / 1
 
-    ops-monitor01.ma01.shuttercorp.net       OK
+    ops-monitor01.ma01.foo.net       OK
     [1349990190] ACKNOWLEDGE_SVC_PROBLEM;prod-mogilefstracker02.tx01.foo.net;Puppet;1;0;1;afeid;some reason
