@@ -2,6 +2,8 @@ metadata    :name        => "nagsrv",
             :description => "Manipulate nagios servers using the ruby-nagios library",
             :author      => "crazed",
             :version     => "0.1",
+            :license     => 'Apache 2.0',
+            :url         => 'github.com/crazed/mcollective-nagsrv',
             :timeout     => 120
 
 [ "enable-notify", "disable-notify", "acknowledge", "unacknowledge" ].each do |act|
