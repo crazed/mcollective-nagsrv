@@ -65,6 +65,10 @@ module Nagios
     def get_servicecomments(host)
       @status['hosts'][host]['servicecomments']
     end
+
+    def get_hostdowntime_id(host)
+      @status['hosts'][host]['hostdowntime']
+    end
   end
 end
 
@@ -176,6 +180,30 @@ module MCollective
           :services  => services,
           :aggregate => aggregate,
         }
+      end
+
+      action 'schedule_host_downtime' do
+        fqdn = request.data[:host]
+        duration = request.data[:duration]
+
+        start_time = Time.now.to_i
+        end_time = start_time + duration
+        fixed = 0
+        trigger_id = 0
+        author = request.sender
+        comment = 'downtime scheduled by mcollective'
+        write_commands(["[#{start_time}] SCHEDULE_HOST_DOWNTIME;#{fqdn};#{start_time};#{end_time};#{fixed};#{trigger_id};#{duration};#{author};#{comment}"])
+      end
+
+      action 'del_host_downtime' do
+        fqdn = request.data[:host]
+        downtime_id = nagios.get_hostdowntime_id(fqdn)
+
+        if downtime_id
+          write_commands(["[#{Time.now.to_i}] DEL_HOST_DOWNTIME;#{downtime_id}"])
+        else
+          reply.fail "host #{fqdn} not currently scheduled for downtime"
+        end
       end
 
       private

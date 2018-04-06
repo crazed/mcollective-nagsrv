@@ -93,3 +93,30 @@ action "info", :description => "return basic info about services" do
          :description => "Info gathered from nagios",
          :display_as => "Info"
 end
+
+action "schedule_host_downtime", :description => "schedules downtime for a specified host." do
+  input :host,
+      :prompt      => 'Host FQDN',
+      :description => 'Fully qualified domain name of host to schedule downtime for',
+      :type        => :string,
+      :validation  => '(?=^.{4,253}$)(^((?!-)[a-zA-Z0-9-]{0,62}[a-zA-Z0-9]\.)+[a-zA-Z]{2,63}$)',
+      :optional    => false,
+      :maxlength   => 1024
+
+  input :duration,
+      :prompt      => 'Duration',
+      :description => 'Length of scheduled downtime in seconds',
+      :type        => :integer,
+      :optional    => false,
+      :default     => 60
+end
+
+action "del_host_downtime", :description => "reinstate a host that has been scheduled for downtime" do
+  input :host,
+      :prompt      => 'Host FQDN',
+      :description => 'Fully qualified domain name of host to cancel downtime for',
+      :type        => :string,
+      :validation  => '(?=^.{4,253}$)(^((?!-)[a-zA-Z0-9-]{0,62}[a-zA-Z0-9]\.)+[a-zA-Z]{2,63}$)',
+      :optional    => false,
+      :maxlength   => 1024
+end
